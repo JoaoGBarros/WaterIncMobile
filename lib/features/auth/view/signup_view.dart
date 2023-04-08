@@ -74,6 +74,8 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                             backgroundColor: Pallete.whiteColor,
                             label: 'SignUp',
                             textColor: Pallete.backgroundColor,
+                            highlight: false,
+                            highlghtColor: null,
                           ),
                         ),
                         const SizedBox(

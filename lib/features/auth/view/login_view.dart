@@ -73,6 +73,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             backgroundColor: Pallete.whiteColor,
                             label: 'Login',
                             textColor: Pallete.backgroundColor,
+                            highlight: false,
+                            highlghtColor: null,
                           ),
                         ),
                         const SizedBox(

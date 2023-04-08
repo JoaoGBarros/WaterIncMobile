@@ -11,6 +11,8 @@ class UserModel {
   final List<String> seguindo;
   final String uid;
   final String profilePic;
+
+  //Construtor
   const UserModel({
     required this.email,
     required this.name,
@@ -20,6 +22,7 @@ class UserModel {
     required this.profilePic,
   });
 
+  // Basicamente um update, o campo defindo vai ser alterado
   UserModel copyWith({
     String? email,
     String? name,
@@ -50,13 +53,15 @@ class UserModel {
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
+    print("No mapa");
+    print(map['profilePic']);
     return UserModel(
       email: map['email'] as String,
       name: map['name'] as String,
-      seguidores: List<String>.from((map['seguidores'] as List<String>)),
-      seguindo: List<String>.from((map['seguindo'] as List<String>)),
-      uid: map['uid'] as String,
+      seguidores: List<String>.from((map['seguidores'])),
+      seguindo: List<String>.from((map['seguindo'])),
       profilePic: map['profilePic'] as String,
+      uid: map['\$id'],
     );
   }
 
