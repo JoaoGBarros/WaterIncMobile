@@ -11,6 +11,7 @@ class UserModel {
   final List<String> seguindo;
   final String uid;
   final String profilePic;
+  final List<String> aguaConsumida;
 
   //Construtor
   const UserModel({
@@ -20,9 +21,11 @@ class UserModel {
     required this.seguindo,
     required this.uid,
     required this.profilePic,
+    required this.aguaConsumida,
   });
 
   // Basicamente um update, o campo defindo vai ser alterado
+
   UserModel copyWith({
     String? email,
     String? name,
@@ -30,6 +33,7 @@ class UserModel {
     List<String>? seguindo,
     String? uid,
     String? profilePic,
+    List<String>? aguaConsumida,
   }) {
     return UserModel(
       email: email ?? this.email,
@@ -38,6 +42,7 @@ class UserModel {
       seguindo: seguindo ?? this.seguindo,
       uid: uid ?? this.uid,
       profilePic: profilePic ?? this.profilePic,
+      aguaConsumida: aguaConsumida ?? this.aguaConsumida,
     );
   }
 
@@ -47,21 +52,21 @@ class UserModel {
       'name': name,
       'seguidores': seguidores,
       'seguindo': seguindo,
-      'uid': uid,
+      'uid': ['\$id'],
       'profilePic': profilePic,
+      'aguaConsumida': aguaConsumida,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
-    print("No mapa");
-    print(map['profilePic']);
     return UserModel(
       email: map['email'] as String,
       name: map['name'] as String,
       seguidores: List<String>.from((map['seguidores'])),
       seguindo: List<String>.from((map['seguindo'])),
+      uid: map['uid'] as String,
       profilePic: map['profilePic'] as String,
-      uid: map['\$id'],
+      aguaConsumida: List<String>.from((map['aguaConsumida'])),
     );
   }
 
@@ -72,7 +77,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(email: $email, name: $name, seguidores: $seguidores, seguindo: $seguindo, uid: $uid, profilePic: $profilePic)';
+    return 'UserModel(email: $email, name: $name, seguidores: $seguidores, seguindo: $seguindo, uid: $uid, profilePic: $profilePic, aguaConsumida: $aguaConsumida)';
   }
 
   @override
@@ -84,7 +89,8 @@ class UserModel {
         listEquals(other.seguidores, seguidores) &&
         listEquals(other.seguindo, seguindo) &&
         other.uid == uid &&
-        other.profilePic == profilePic;
+        other.profilePic == profilePic &&
+        listEquals(other.aguaConsumida, aguaConsumida);
   }
 
   @override
@@ -94,6 +100,7 @@ class UserModel {
         seguidores.hashCode ^
         seguindo.hashCode ^
         uid.hashCode ^
-        profilePic.hashCode;
+        profilePic.hashCode ^
+        aguaConsumida.hashCode;
   }
 }

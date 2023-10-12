@@ -1,5 +1,5 @@
-import 'package:app/api/auth_api.dart';
-import 'package:app/api/user_api.dart';
+import 'package:app/features/auth/api/auth_api.dart';
+import 'package:app/features/user/api/user_api.dart';
 import 'package:app/core/core.dart';
 import 'package:app/features/auth/view/login_view.dart';
 import 'package:app/features/home/view/home_view.dart';
@@ -19,7 +19,6 @@ final authControllerProvider =
 final currentUserDetailsProvider = FutureProvider((ref) {
   final currentUserId = ref.watch(currentUserAccountProvider).value!.$id;
   final userDetails = ref.watch(userDetailsProvider(currentUserId));
-  print(userDetails);
   return userDetails.value;
 });
 
@@ -58,7 +57,8 @@ class AuthController extends StateNotifier<bool> {
           seguidores: const [],
           seguindo: const [],
           uid: r.$id,
-          profilePic: '');
+          profilePic: '',
+          aguaConsumida: []);
 
       final res = await _userAPI.saveUserData(userModel);
       res.fold((l) => showSnackBar(context, l.message), (r) {
@@ -83,6 +83,7 @@ class AuthController extends StateNotifier<bool> {
 
   Future<UserModel> getUserData(String uid) async {
     final document = await _userAPI.getUserData(uid);
+    print(document.$id);
     final updatedUser = UserModel.fromMap(document.data);
     print(updatedUser.email);
     return updatedUser;

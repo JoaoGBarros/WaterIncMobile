@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 class RoundedSmallButton extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
+  final bool highlight;
+  final Color? highlghtColor;
   final Color backgroundColor;
   final Color textColor;
 
@@ -13,7 +15,9 @@ class RoundedSmallButton extends StatelessWidget {
       required this.onTap,
       required this.label,
       required this.backgroundColor,
-      required this.textColor});
+      required this.textColor,
+      required this.highlight,
+      required this.highlghtColor});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class RoundedSmallButton extends StatelessWidget {
           label,
           style: TextStyle(color: textColor, fontSize: 16),
         ),
-        backgroundColor: backgroundColor,
+        backgroundColor: highlight == true ? highlghtColor : backgroundColor,
         labelPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       ),
     );
